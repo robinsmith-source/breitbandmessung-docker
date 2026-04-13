@@ -18,8 +18,8 @@ end_time_minutes=$(time_to_minutes $TIME_END)
 while true
 do
 
-    # wait 15 seconds, then check again
-    sleep 15
+    # wait before checking again (default: 15 seconds)
+    sleep ${POLL_INTERVAL:-15}
 
     # get value of clipboard from novnc
     clipboard="$(DISPLAY=:0 xclip -o)"
@@ -89,7 +89,7 @@ do
 
     else
         echo "RUN not set in clipboard or file /RUN not available. (value in clipboard is \"$clipboard\")"
-        printf "sleeping 15 seconds.\n\n"
+        printf "sleeping ${POLL_INTERVAL:-120} seconds.\n\n"
     fi
 
 done
